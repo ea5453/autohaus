@@ -14,6 +14,16 @@ components:
     properties: {placeholder: Nachname}
     type: TextBox
   - event_bindings: {}
+    layout_properties: {grid_position: 'QDQHIX,UDDXUE'}
+    name: radio_button_Kunde
+    properties: {text: Kunde}
+    type: RadioButton
+  - event_bindings: {}
+    layout_properties: {grid_position: 'SVSMYE,HBJAGH'}
+    name: radio_button_Mitarbeiter
+    properties: {text: Mitarbeiter}
+    type: RadioButton
+  - event_bindings: {}
     layout_properties: {grid_position: 'JNBVLM,LVYPDD'}
     name: text_box_id
     properties: {placeholder: id}
@@ -24,7 +34,7 @@ components:
       items: [Nur für Mitarbeiter*]
     type: DropDown
   - layout_properties: {grid_position: 'TXUIYT,SMKKYA'}
-    name: butteon_anmelden
+    name: button_singn_in
     properties: {text: Anmelden}
     type: Button
   layout_properties: {slot: default}
