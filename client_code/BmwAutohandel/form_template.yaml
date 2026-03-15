@@ -15,15 +15,19 @@ components:
     type: TextBox
   - layout_properties: {grid_position: 'JNBVLM,LVYPDD'}
     name: text_box_3
-    properties: {}
+    properties: {placeholder: id}
     type: TextBox
+  - layout_properties: {grid_position: 'TXUIYT,SMKKYA'}
+    name: butteon_anmelden
+    properties: {text: Anmelden}
+    type: Button
   layout_properties: {slot: default}
   name: column_panel_1
   properties: {}
   type: ColumnPanel
 - layout_properties: {slot: title}
   name: label_1
-  properties: {text: Anmelden}
+  properties: {text: Wilkommen im Bmw Autohaus!}
   type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
