@@ -10,4 +10,12 @@ class BmwAutohandel(BmwAutohandelTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
+    return_value = anvil.server.call('select_Mitarbeiter','SELECT DISTINCT Position FROM Mitarbeiter')
+    return_value = [entry[0] for entry in return_value]
+    self.drop_down_mitarbeiter.items = return_value
     # Any code you write here will run before the form opens.
+
+  @handle("text_box_id", "pressed_enter")
+  def text_box_id_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    pass

@@ -19,14 +19,14 @@ import sqlite3
 #   return 42
 #
 @anvil.server.callable
-def check_login(Kid,Mid,Vorname,Nachname):
+def check_login(kid,mid,vorname,nachname,position):
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
     cur = conn.cursor()
     
     cur.execute("""
-    SELECT Mid,Vorname,Nachname FROM Mitarbeiter
-    WHERE Mid = ? AND Vorname = ? AND Nachname = ?
-    """,(Mid,Vorname,Nachname))
+    SELECT * FROM Mitarbeiter
+    WHERE Mid = ? AND Vorname = ? AND Nachname = ? AND Position = ?
+    """,(kid,mid,vorname,nachname,position))
     Mitarbeiter = cur.fetchone()
 
     if Mitarbeiter:
@@ -35,7 +35,7 @@ def check_login(Kid,Mid,Vorname,Nachname):
       cur.execute("""
       SELECT Mid,Vorname,Nachname FROM Kunde
       WHERE Kid = ? AND Vorname = ? AND Nachname = ?
-      """,(Kid,Vorname,Nachname))
+      """,(kid,vorname,nachname))
       Kunde = cur.fetchone()
 
     elif Kunde:
@@ -45,5 +45,11 @@ def check_login(Kid,Mid,Vorname,Nachname):
       return None
     
 
-    
+@anvil.server.callable
+def select_Mitarbeiter(query: str):
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Mitarbeiter")
+    result = cur.execute(query).fetchall()
+  return result 
 

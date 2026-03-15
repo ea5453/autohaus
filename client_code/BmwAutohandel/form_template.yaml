@@ -6,17 +6,23 @@ components:
   type: FlowPanel
 - components:
   - layout_properties: {grid_position: 'KRMPHY,ZNVCMR'}
-    name: text_box_1
+    name: text_box_vorname
     properties: {placeholder: Vorname}
     type: TextBox
   - layout_properties: {grid_position: 'XCXUBY,GAEEQA'}
-    name: text_box_2
+    name: text_box_nachname
     properties: {placeholder: Nachname}
     type: TextBox
-  - layout_properties: {grid_position: 'JNBVLM,LVYPDD'}
-    name: text_box_3
+  - event_bindings: {}
+    layout_properties: {grid_position: 'JNBVLM,LVYPDD'}
+    name: text_box_id
     properties: {placeholder: id}
     type: TextBox
+  - layout_properties: {grid_position: 'LSRODQ,XIGVSI'}
+    name: drop_down_mitarbeiter
+    properties:
+      items: [Nur für Mitarbeiter*]
+    type: DropDown
   - layout_properties: {grid_position: 'TXUIYT,SMKKYA'}
     name: butteon_anmelden
     properties: {text: Anmelden}
