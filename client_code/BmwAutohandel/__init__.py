@@ -14,7 +14,7 @@ class BmwAutohandel(BmwAutohandelTemplate):
     return_value = [entry[0] for entry in return_value]
     self.drop_down_mitarbeiter.items = return_value
 
-  def check_button_sign_in()
+  # def check_button_sign_in()
 
   @handle("text_box_id", "pressed_enter")
   def text_box_id_pressed_enter(self, **event_args):
