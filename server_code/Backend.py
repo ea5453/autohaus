@@ -37,14 +37,12 @@ def check_login_mitarbeiter(mid, vorname, nachname, position):
               "vorname": mitarbeiter[1],
               "nachname": mitarbeiter[2],
               "position": mitarbeiter[3]}
-      
   return None
 
 @anvil.server.callable
 def check_login_kunde(kid, vorname, nachname):
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
     cur = conn.cursor()
-
     cur.execute("""
             SELECT Kid, Vorname, Nachname
             FROM Kunde

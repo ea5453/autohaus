@@ -35,26 +35,32 @@ class BmwAutohandel(BmwAutohandelTemplate):
   def button_singn_in_click(self, **event_args):
 
     get_check_log_in_Kunde = anvil.server.call('check_login_kunde',
+                                               int(self.text_box_id.text),
                                                self.text_box_vorname.text,
-                                               self.text_box_nachname.text,
-                                               self.text_box_id.text
+                                               self.text_box_nachname.text
                                               )
 
     get_check_log_in_Mitarbeiter = anvil.server.call('check_login_mitarbeiter',
+                                                int(self.text_box_id.text),
                                                self.text_box_vorname.text,
                                                self.text_box_nachname.text,
-                                               self.text_box_id.text,
                                                self.drop_down_mitarbeiter.selected_value
                                               )
-    #if self.radio_button_Kunde.selected:
-      #get_check_log_in_Kunde
-      #open_form('')
-   
+  
     if self.radio_button_Mitarbeiter.selected:
-      if get_check_log_in_Mitarbeiter is None:
-        alert("Login Falsch")
+      if get_check_log_in_Mitarbeiter is None :
+        alert("Login falsch")
         return
-      if self.drop_down_mitarbeiter.selected_value == "Verkäufer" or self.drop_down_mitarbeiter.selected_value == "Serviceberater":
-          get_check_log_in_Mitarbeiter
-          open_form('BmwAutohandel.Kunde')
+      if get_check_log_in_Mitarbeiter["position"] == 'Verkäufer':
+        print(get_check_log_in_Mitarbeiter)
+        open_form('BmwAutohandel.Kunde')
+      elif get_check_log_in_Mitarbeiter["position"] == 'Serviceberater':
+        open_form('BmwAutohandel.Kunde')
+
+    if self.radio_button_Kunde.selected:
+      if get_check_log_in_Kunde is None :
+        print(get_check_log_in_Kunde)
+        alert("Login falsch1")
+        return
+      open_form('')
     pass

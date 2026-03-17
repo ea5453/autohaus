@@ -9,6 +9,13 @@ unique_ids:
     BmwAutohandel.Kunde.ItemTemplate1.ItemTemplate2: '1773754977496167982508576.80518'
     BmwAutohandel.Kunde.ItemTemplate1.RowTemplate1: '1773754996359328072840537.8618'
     BmwAutohandel.Kunde.RowTemplate2: '17737550114552957644076.1978073'
+    BmwAutohandel.Kunde.RowTemplate6: '1773778583841621976587162.8301'
+    BmwAutohandel.Service: '1773778465996230128924577.5'
+    BmwAutohandel.Service.RowTemplate5: '1773778531932883132904500.0399'
+    BmwAutohandel.Verkaufsdaten: '177377861686160624081850.48795'
+    BmwAutohandel.fahrzeuge: '1773777730007285871792546.10376'
+    BmwAutohandel.fahrzeuge.RowTemplate3: '1773778187113242219616460.19662'
+    BmwAutohandel.fahrzeuge.RowTemplate4: '1773778283392217144288520.08716'
   modules: {}
   scripts: {}
   server_modules:
