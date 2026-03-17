@@ -38,7 +38,7 @@ def check_login_mitarbeiter(mid, vorname, nachname, position):
               "nachname": mitarbeiter[2],
               "position": mitarbeiter[3]}
       
-
+  return None
 
 @anvil.server.callable
 def check_login_kunde(kid, vorname, nachname):
@@ -58,6 +58,7 @@ def check_login_kunde(kid, vorname, nachname):
               "id": kunde[0],
               "vorname": kunde[1],
               "nachname": kunde[2]}
+  return None
 
 @anvil.server.callable
 def select_Mitarbeiter():
@@ -68,11 +69,13 @@ def select_Mitarbeiter():
   return [row[0] for row in result]
 
 @anvil.server.callable
-def select_Kunde(query: str):
+def select_Kunde():
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     cur.execute("SELECT * FROM Kunde")
-    rows = cur.execute(query).fetchall()
-    # In Liste von Dictionaries umwandeln
+    rows = cur.fetchall()
     return [dict(row) for row in rows]
+
+
 

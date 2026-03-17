@@ -49,10 +49,12 @@ class BmwAutohandel(BmwAutohandelTemplate):
     #if self.radio_button_Kunde.selected:
       #get_check_log_in_Kunde
       #open_form('')
-
    
-    
     if self.radio_button_Mitarbeiter.selected:
-      get_check_log_in_Mitarbeiter
-      open_form('BmwAutohandel.Kunde')
+      if get_check_log_in_Mitarbeiter is None:
+        alert("Login Falsch")
+        return
+      if self.drop_down_mitarbeiter.selected_value == "Verkäufer" or self.drop_down_mitarbeiter.selected_value == "Serviceberater":
+          get_check_log_in_Mitarbeiter
+          open_form('BmwAutohandel.Kunde')
     pass
