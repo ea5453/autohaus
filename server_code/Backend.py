@@ -19,37 +19,60 @@ import sqlite3
 #   return 42
 #
 @anvil.server.callable
-def check_login(kid,mid,vorname,nachname,position):
+def check_login_mitarbeiter(mid, vorname, nachname, position):
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
     cur = conn.cursor()
     
     cur.execute("""
-    SELECT * FROM Mitarbeiter
-    WHERE Mid = ? AND Vorname = ? AND Nachname = ? AND Position = ?
-    """,(kid,mid,vorname,nachname,position))
-    Mitarbeiter = cur.fetchone()
+            SELECT Mid, Vorname, Nachname, Position
+            FROM Mitarbeiter
+            WHERE Mid = ? AND Vorname = ? AND Nachname = ? AND Position = ?
+        """, (mid, vorname, nachname, position))
 
-    if Mitarbeiter:
-      return Mitarbeiter[0],Mitarbeiter[1],Mitarbeiter[2]
+    mitarbeiter = cur.fetchone()
 
-      cur.execute("""
-      SELECT Mid,Vorname,Nachname FROM Kunde
-      WHERE Kid = ? AND Vorname = ? AND Nachname = ?
-      """,(kid,vorname,nachname))
-      Kunde = cur.fetchone()
+    if mitarbeiter:
+      return {"rolle": "Mitarbeiter",
+              "id": mitarbeiter[0],
+              "vorname": mitarbeiter[1],
+              "nachname": mitarbeiter[2],
+              "position": mitarbeiter[3]}
+      
 
-    elif Kunde:
-      return Kunde[0],Kunde[1],Kunde[2]
-
-    else:
-      return None
-    
 
 @anvil.server.callable
-def select_Mitarbeiter(query: str):
+def check_login_kunde(kid, vorname, nachname):
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
     cur = conn.cursor()
-    cur.execute("SELECT * FROM Mitarbeiter")
-    result = cur.execute(query).fetchall()
-  return result 
+
+    cur.execute("""
+            SELECT Kid, Vorname, Nachname
+            FROM Kunde
+            WHERE Kid = ? AND Vorname = ? AND Nachname = ? 
+        """, (kid, vorname, nachname))
+
+    kunde = cur.fetchone()
+
+    if kunde:
+      return {"rolle": "Kunde",
+              "id": kunde[0],
+              "vorname": kunde[1],
+              "nachname": kunde[2]}
+
+@anvil.server.callable
+def select_Mitarbeiter():
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    cur = conn.cursor()
+    cur.execute("SELECT DISTINCT Position FROM Mitarbeiter")
+    result = cur.fetchall()
+  return [row[0] for row in result]
+
+@anvil.server.callable
+def select_Kunde(query: str):
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Kunde")
+    rows = cur.execute(query).fetchall()
+    # In Liste von Dictionaries umwandeln
+    return [dict(row) for row in rows]
 
