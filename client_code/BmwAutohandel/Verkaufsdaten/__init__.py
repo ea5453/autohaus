@@ -14,7 +14,26 @@ class Verkaufsdaten(VerkaufsdatenTemplate):
     verkaeufer = anvil.server.call("get_verkaeufer")
     self.drop_down_verkaufer.items = [(v["Name"], v["Mid"]) for v in verkaeufer]
 
-  
+
+    namen, summen = anvil.server.call("get_alle_verkaufssummen")
+    
+    fig = go.Figure(
+      data=[go.Bar(
+        x=namen,
+        y=summen,
+        text=summen,
+        textposition="auto"
+      )]
+    )
+      
+    fig.update_layout(
+      title="Verkäufe pro Verkäufer",
+      xaxis_title="Verkäufer",
+      yaxis_title="€"
+    )
+      
+    self.plot_1.figure = fig
+      
    
 
   @handle("button_back_to_Verkauf", "click")

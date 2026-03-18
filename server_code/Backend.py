@@ -135,4 +135,24 @@ def get_verkaufssumme(Mid):
     # Falls der Verkäufer noch keine Verkäufe hat, Summe = 0
     return result if result is not None else 0
 
+
+
+@anvil.server.callable
+def get_alle_verkaufssummen():
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    cur = conn.cursor()
+    cur.execute("""
+            SELECT m.Vorname || ' ' || m.Nachname, SUM(f.Preis)
+            FROM Verkauf v
+            JOIN Mitarbeiter m ON v.Mid = m.Mid
+            JOIN Fahrzeug f ON v.WIN = f.WIN
+            WHERE m.Position='Verkäufer'
+            GROUP BY m.Mid
+        """)
+    rows = cur.fetchall()
+
+    namen = [row[0] for row in rows]
+    summen = [row[1] for row in rows]
+
+    return namen, summen
   
