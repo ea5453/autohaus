@@ -90,29 +90,49 @@ def select_Probefahrt():
   return [dict(row) for row in rows_p]
 
 
+
+
 @anvil.server.callable
-def select_Verkauf(Mid):
+def get_verkaeufer():
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     cur.execute("""
-            SELECT 
-                v.WIN,
-                f.Preis,
-                v.Datum
+            SELECT Mid, Vorname || ' ' || Nachname AS Name
+            FROM Mitarbeiter
+            WHERE Position = 'Verkäufer'
+        """)
+    rows = cur.fetchall()
+    return [dict(row) for row in rows]
+
+@anvil.server.callable
+def get_verkaeufe_for_mid(Mid):
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("""
+            SELECT f.WIN, f.Preis, v.Datum
             FROM Verkauf v
-            JOIN Fahrzeug f
-                ON v.WIN = f.WIN
-            WHERE v.Mid = ?;  
+            JOIN Fahrzeug f ON v.WIN = f.WIN
+            WHERE v.Mid = ?
+            ORDER BY v.Datum
         """, (Mid,))
     rows = cur.fetchall()
-
-    result = []
-    for row in rows:
-      result.append({
-        "WIN": row[0],
-        "Preis": row[1],
-        "Datum": row[2] })
-  return result
+    return [dict(row) for row in rows]
 
 
+@anvil.server.callable
+def get_verkaufssumme(Mid):
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    cur = conn.cursor()
+    cur.execute("""
+            SELECT SUM(f.Preis) 
+            FROM Verkauf v
+            JOIN Fahrzeug f ON v.WIN = f.WIN
+            WHERE v.Mid = ?;
+        """, (Mid,))
+    result = cur.fetchone()[0]
+    # Falls der Verkäufer noch keine Verkäufe hat, Summe = 0
+    return result if result is not None else 0
+
+  
