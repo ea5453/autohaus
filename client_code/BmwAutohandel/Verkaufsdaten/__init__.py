@@ -15,9 +15,7 @@ class Verkaufsdaten(VerkaufsdatenTemplate):
     self.drop_down_verkaufer.items = [(v["Name"], v["Mid"]) for v in verkaeufer]
 
   
-    get_sum_verkauf = anvil.server.call('get_verkaufssumme',self.drop_down_verkaufer )
-    self.label_summe.text = f"{get_sum_verkauf} €"
-    # Any code you write here will run before the form opens.
+   
 
   @handle("button_back_to_Verkauf", "click")
   def button_back_to_Verkauf_click(self, **event_args):
@@ -29,3 +27,7 @@ class Verkaufsdaten(VerkaufsdatenTemplate):
     selected_mid = self.drop_down_verkaufer.selected_value
     verkaufsliste = anvil.server.call("get_verkaeufe_for_mid", selected_mid)
     self.repeating_panel_verkauf.items = verkaufsliste
+
+    
+    get_sum_verkauf = anvil.server.call('get_verkaufssumme',self.drop_down_verkaufer.selected_value )
+    self.label_summe.text = f"{get_sum_verkauf} €"
