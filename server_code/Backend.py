@@ -6,18 +6,6 @@ from anvil.tables import app_tables
 import anvil.server
 import sqlite3
 
-# This is a server module. It runs on the Anvil server,
-# rather than in the user's browser.
-#
-# To allow anvil.server.call() to call functions here, we mark
-# them with @anvil.server.callable.
-# Here is an example - you can replace it with your own:
-#
-# @anvil.server.callable
-# def say_hello(name):
-#   print("Hello, " + name + "!")
-#   return 42
-#
 @anvil.server.callable
 def check_login_mitarbeiter(mid, vorname, nachname, position):
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
@@ -75,5 +63,48 @@ def select_Kunde():
     rows = cur.fetchall()
     return [dict(row) for row in rows]
 
+
+
+@anvil.server.callable
+def select_Probefahrt():
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+  cur = conn.cursor()
+  cur.execute("""
+    SELECT 
+          p.Datum,
+          p.WIN,
+          p.Kid,
+          k.Vorname,
+          k.Nachname,
+          m.Modellname
+      FROM Probefahrt p
+      LEFT JOIN Kunde k
+          ON p.Kid = k.Kid
+      LEFT JOIN Fahrzeug f
+          ON p.WIN = f.WIN
+      LEFT JOIN Modellreihe m
+          ON f.ModellId = m.ModellId;
+  """)
+  rows_p = cur.fetchall()
+  return [dict(row) for row in rows_p]
+
+
+@anvil.server.callable
+def select_Verkauf(Mid):
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("""
+            SELECT 
+                f.Preis,
+                v.Datum,
+                f.WIN
+            FROM Fahrzeug f
+            JOIN Verkauf v ON f.WIN = v.WIN
+            WHERE v.Mid = ?;
+        """, (Mid,))  # <-- Tupel mit Komma!
+    rows_v = cur.fetchall()
+    return [dict(row) for row in rows_v]
 
 

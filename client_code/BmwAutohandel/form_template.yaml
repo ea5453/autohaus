@@ -28,7 +28,8 @@ components:
     name: text_box_id
     properties: {placeholder: id}
     type: TextBox
-  - layout_properties: {grid_position: 'LSRODQ,XIGVSI'}
+  - event_bindings: {}
+    layout_properties: {grid_position: 'LSRODQ,XIGVSI'}
     name: drop_down_mitarbeiter
     properties:
       items: [Nur für Mitarbeiter*]
@@ -39,7 +40,7 @@ components:
     properties: {text: Anmelden}
     type: Button
   layout_properties: {slot: default}
-  name: column_panel_1
+  name: column_panel_main
   properties: {}
   type: ColumnPanel
 - layout_properties: {slot: title}

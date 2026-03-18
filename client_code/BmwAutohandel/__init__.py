@@ -53,14 +53,16 @@ class BmwAutohandel(BmwAutohandelTemplate):
         return
       if get_check_log_in_Mitarbeiter["position"] == 'Verkäufer':
         print(get_check_log_in_Mitarbeiter)
-        open_form('BmwAutohandel.Kunde')
+        open_form('BmwAutohandel.Verkauf')
       elif get_check_log_in_Mitarbeiter["position"] == 'Serviceberater':
-        open_form('BmwAutohandel.Kunde')
+        open_form('BmwAutohandel.Service')
 
     if self.radio_button_Kunde.selected:
       if get_check_log_in_Kunde is None :
         print(get_check_log_in_Kunde)
         alert("Login falsch1")
         return
-      open_form('')
+      open_form('BmwAutohandel.fahrzeuge')
     pass
+
+

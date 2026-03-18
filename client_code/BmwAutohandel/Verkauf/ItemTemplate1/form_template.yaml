@@ -1,7 +1,7 @@
 components:
 - components:
   - name: repeating_panel_1
-    properties: {item_template: BmwAutohandel.Kunde.ItemTemplate1.RowTemplate1}
+    properties: {item_template: BmwAutohandel.Verkauf.ItemTemplate1.RowTemplate1}
     type: RepeatingPanel
   layout_properties: {grid_position: 'JUWMBP,NMKEPZ'}
   name: data_grid_1

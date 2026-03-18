@@ -2,7 +2,7 @@ components:
 - components:
   - components:
     - name: repeating_panel_kunde
-      properties: {item_template: BmwAutohandel.Kunde.RowTemplate2}
+      properties: {item_template: BmwAutohandel.Verkauf.RowTemplate2}
       type: RepeatingPanel
     data_bindings: []
     layout_properties: {grid_position: 'AUJBBI,VLELVL'}
@@ -13,23 +13,32 @@ components:
       - {data_key: Vorname, id: VJQQOR, title: Vorname}
       - {data_key: Nachname, id: OJLQEN, title: Nachname}
     type: DataGrid
+  - layout_properties: {grid_position: 'MDRDZE,LUGZJO'}
+    name: rich_text_1
+    properties: {content: Probefahrt}
+    type: RichText
   - components:
-    - name: repeating_panel_1
-      properties: {item_template: BmwAutohandel.Kunde.RowTemplate6}
+    - name: repeating_panel_Probefahrt
+      properties: {item_template: BmwAutohandel.Verkauf.RowTemplate6}
       type: RepeatingPanel
     layout_properties: {grid_position: 'TCPBXG,NGOSHV'}
     name: data_grid_1
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Column 1}
-      - {data_key: column_2, id: VJQQOR, title: Column 2}
-      - {data_key: column_3, id: OJLQEN, title: Column 3}
+      - {data_key: Datum, id: JKSDUP, title: Datum}
+      - {data_key: WIN, id: VJQQOR, title: WIN}
+      - {data_key: Kid, id: OJLQEN, title: Kid}
+      - {data_key: Vorname, id: CYICUD, title: Vorname}
+      - {data_key: Nachname, id: YAVARU, title: Nachname}
+      - {data_key: Modellname, id: APDXCS, title: Modell}
     type: DataGrid
-  - layout_properties: {grid_position: 'IJASIF,XNJYSE'}
+  - event_bindings: {}
+    layout_properties: {grid_position: 'IJASIF,XNJYSE'}
     name: button_verkauf
     properties: {text: Verkaufsdaten}
     type: Button
-  - layout_properties: {grid_position: 'ALFROE,CRFPTF'}
+  - event_bindings: {}
+    layout_properties: {grid_position: 'ALFROE,CRFPTF'}
     name: Button_back_to_main
     properties: {text: Zurück}
     type: Button
