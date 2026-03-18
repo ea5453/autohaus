@@ -89,9 +89,6 @@ def select_Probefahrt():
   rows_p = cur.fetchall()
   return [dict(row) for row in rows_p]
 
-
-
-
 @anvil.server.callable
 def get_verkaeufer():
   with sqlite3.connect(data_files["autohaus.db"]) as conn:
@@ -155,4 +152,59 @@ def get_alle_verkaufssummen():
     summen = [row[1] for row in rows]
 
     return namen, summen
-  
+
+@anvil.server.callable
+def get_wartung_daten():
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    cur = conn.cursor()
+    cur.execute("SELECT DISTINCT Datum FROM Wartung")
+    return [row[0] for row in cur.fetchall()]
+
+@anvil.server.callable
+def get_wartung(datum):
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("""
+            SELECT *
+            FROM Wartung
+            WHERE Datum = ?
+        """, (datum,))
+    rows = cur.fetchall()
+    return [dict(row) for row in rows]
+
+@anvil.server.callable
+def get_reparatur_pie_data():
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    cur = conn.cursor()
+    # Zähle, wie oft jede Reparatur vorkommt
+    cur.execute("""
+            SELECT Reparatur, COUNT(*) as Anzahl
+            FROM Wartung
+            WHERE Reparatur IS NOT NULL AND Reparatur != ''
+            GROUP BY Reparatur
+        """)
+    rows = cur.fetchall()
+    # Listen für Labels und Werte zurückgeben
+    labels = [row[0] for row in rows]
+    values = [row[1] for row in rows]
+    return labels, values
+
+@anvil.server.callable
+def get_modellreihen_tabelle():
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Modellreihe")
+    rows = cur.fetchall()
+    return [dict(row) for row in rows]
+
+@anvil.server.callable
+def get_fahrzeug_tabelle():
+  with sqlite3.connect(data_files["autohaus.db"]) as conn:
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Fahrzeug")
+    rows = cur.fetchall()
+    return [dict(row) for row in rows]
+

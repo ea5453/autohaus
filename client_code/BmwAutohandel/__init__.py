@@ -58,7 +58,7 @@ class BmwAutohandel(BmwAutohandelTemplate):
         open_form('BmwAutohandel.Service')
 
     if self.radio_button_Kunde.selected:
-      if get_check_log_in_Kunde is None :
+      if get_check_log_in_Kunde is None:
         print(get_check_log_in_Kunde)
         alert("Login falsch1")
         return

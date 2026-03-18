@@ -1,32 +1,36 @@
 components:
 - components:
   - components:
-    - name: repeating_panel_1
+    - name: repeating_panel_modell
       properties: {item_template: BmwAutohandel.fahrzeuge.RowTemplate3}
       type: RepeatingPanel
-    layout_properties: {grid_position: 'JBSCJV,FGXZWS'}
+    layout_properties: {grid_position: 'AHGYTJ,AVVXPU'}
     name: data_grid_1
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Column 1}
-      - {data_key: column_2, id: VJQQOR, title: Column 2}
-      - {data_key: column_3, id: OJLQEN, title: Column 3}
+      - {data_key: Modellname, id: JKSDUP, title: Modellname}
+      - {data_key: Kategorie, id: VJQQOR, title: Kategorie}
+      - {data_key: Fahrzeugtyp, id: OJLQEN, title: Fahrzeugtyp}
+      - {data_key: Lagerbestand, id: XWSKAL, title: Lagerbestand}
+      - {data_key: ModellId, id: VHQHQR, title: Modellid}
     type: DataGrid
   - layout_properties: {grid_position: 'DMFFQW,WAEHFQ'}
     name: label_2
     properties: {text: Fahrzeuge}
     type: Label
   - components:
-    - name: repeating_panel_2
+    - name: repeating_panel_Fahrzeug
       properties: {item_template: BmwAutohandel.fahrzeuge.RowTemplate4}
       type: RepeatingPanel
-    layout_properties: {grid_position: 'QLUIBB,MTKKYI'}
+    layout_properties: {grid_position: 'XOUAOB,UGQATJ'}
     name: data_grid_2
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Column 1}
-      - {data_key: column_2, id: VJQQOR, title: Column 2}
-      - {data_key: column_3, id: OJLQEN, title: Column 3}
+      - {data_key: WIN, id: JKSDUP, title: WIN}
+      - {data_key: ModellId, id: VJQQOR, title: Modellid}
+      - {data_key: Farbe, id: OJLQEN, title: Farbe}
+      - {data_key: Motorisierung, id: WWKNUH, title: Motorisierung}
+      - {data_key: Preis, id: KIGKIC, title: Preis}
     type: DataGrid
   - event_bindings: {}
     layout_properties: {grid_position: 'TJCYWM,DUUXAE'}

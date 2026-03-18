@@ -1,18 +1,30 @@
 components:
 - components:
+  - event_bindings: {}
+    layout_properties: {grid_position: 'MDLABU,XBUPKN'}
+    name: drop_down_wartung
+    properties: {}
+    type: DropDown
   - components:
-    - name: repeating_panel_1
+    - name: repeating_panel_wartung
       properties: {item_template: BmwAutohandel.Service.RowTemplate5}
       type: RepeatingPanel
     layout_properties: {grid_position: 'NJXHMR,TPOIYR'}
     name: data_grid_1
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Column 1}
-      - {data_key: column_2, id: VJQQOR, title: Column 2}
-      - {data_key: column_3, id: OJLQEN, title: Column 3}
+      - {data_key: WIN, id: JKSDUP, title: WIN}
+      - {data_key: Reparatur, id: VJQQOR, title: Reparatur}
+      - {data_key: Inspektion, id: OJLQEN, title: Inspektion}
+      - {data_key: Reifenwechsel, id: CKXKDZ, title: Reifen Wechsel}
+      - {data_key: Preis, id: NONJIY, title: Preis}
     type: DataGrid
-  - layout_properties: {grid_position: 'RWGHOU,GQZOCM'}
+  - layout_properties: {grid_position: 'OPBSBW,KLTXBT'}
+    name: plot_service
+    properties: {}
+    type: Plot
+  - event_bindings: {}
+    layout_properties: {grid_position: 'RWGHOU,GQZOCM'}
     name: button_1
     properties: {text: Zurück}
     type: Button
