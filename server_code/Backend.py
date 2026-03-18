@@ -97,14 +97,22 @@ def select_Verkauf(Mid):
     cur = conn.cursor()
     cur.execute("""
             SELECT 
+                v.WIN,
                 f.Preis,
-                v.Datum,
-                f.WIN
-            FROM Fahrzeug f
-            JOIN Verkauf v ON f.WIN = v.WIN
-            WHERE v.Mid = ?;
-        """, (Mid,))  # <-- Tupel mit Komma!
-    rows_v = cur.fetchall()
-    return [dict(row) for row in rows_v]
+                v.Datum
+            FROM Verkauf v
+            JOIN Fahrzeug f
+                ON v.WIN = f.WIN
+            WHERE v.Mid = ?;  
+        """, (Mid,))
+    rows = cur.fetchall()
+
+    result = []
+    for row in rows:
+      result.append({
+        "WIN": row[0],
+        "Preis": row[1],
+        "Datum": row[2] })
+  return result
 
 

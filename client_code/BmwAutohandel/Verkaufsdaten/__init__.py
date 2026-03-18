@@ -13,6 +13,7 @@ class Verkaufsdaten(VerkaufsdatenTemplate):
     self.init_components(**properties)
     get_data_verkauf = anvil.server.call('select_Verkauf',self.drop_down_verkaufer.selected_value)
     self.repeating_panel_verkauf.items = get_data_verkauf
+    print(self.repeating_panel_verkauf.items)
 
     # Any code you write here will run before the form opens.
 
